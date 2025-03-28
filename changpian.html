@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类似网易云的姗姗歌 CD 播放器</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            /* 可将此处的图片链接替换为你自己的背景图片链接 */
+            background-image: url('https://dummyimage.com/1920x1080/000/fff&text=Background+Image'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+        }
+
+        .player {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+        }
+
+        .cd-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+        }
+
+        .cd {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            /* 可将此处的图片链接替换为你自己的唱片封面图片链接 */
+            background: url('https://dummyimage.com/200x200/000/fff&text=Album+Cover') center/cover no-repeat; 
+            border: 10px solid #e0e0e0;
+            animation: rotate 5s linear infinite;
+            animation-play-state: paused;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .lyrics {
+            height: 150px;
+            overflow: hidden;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .lyrics p {
+            margin: 5px 0;
+            color: #333;
+            transition: all 0.3s;
+        }
+
+        .lyrics p.active {
+            color: #1db954;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #1db954;
+            border-radius: 5px;
+            width: 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* 允许控件换行 */
+        }
+
+        .controls button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            margin: 0 10px;
+        }
+
+        .volume {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            width: 100%; /* 让音量条占满一行 */
+            justify-content: center; /* 音量条居中 */
+            margin-top: 10px; /* 与播放键有一定间距 */
+        }
+
+        .volume input {
+            width: 80px;
+            margin-left: 5px;
+        }
+
+        /* 圆形播放按钮样式 */
+        #play-pause {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: orange;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            writing-mode: horizontal-tb;
+            margin: 0 auto; /* 按钮居中 */
+            flex-basis: 100%; /* 让按钮单独占一行 */
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player">
+        <div class="cd-container">
+            <div class="cd"></div>
+        </div>
+        <div class="lyrics">
+            <p data-time="0.00">姗姗 最近睡眠好吗</p>
+            <p data-time="5.00">好久 没跟你说说话</p>
+            <p data-time="10.00">看到 你签名里写着</p>
+            <p data-time="15.00">正能量的话</p>
+            <p data-time="20.00">越活泼越难过吧</p>
+            <p data-time="25.00">越洒脱越放不下</p>
+            <p data-time="30.00">成人后情绪总反着表达</p>
+            <p data-time="35.00">几杯黄汤以后 你说</p>
+            <p data-time="40.00">走着走着怎么脚步渐渐慢了</p>
+            <p data-time="45.00">忙着忙着怎么生活变得拖沓</p>
+            <p data-time="50.00">街角的旧楼推倒了</p>
+            <p data-time="55.00">怀旧的人 住在热闹繁华的大厦</p>
+            <p data-time="60.00">爱着爱着怎么爱人就不见了</p>
+            <p data-time="65.00">想着想着怎么样子也模糊了</p>
+            <p data-time="70.00">当初多特别的一个</p>
+            <p data-time="75.00">平凡的 丢进人海里匆匆着</p>
+            <p data-time="80.00">姗姗 我们放下电话</p>
+            <p data-time="85.00">今晚 让它被冷落吧</p>
+            <p data-time="90.00">承认 我们没有活成</p>
+            <p data-time="95.00">社交网络的样子</p>
+            <p data-time="100.00">越活泼越难过吧</p>
+            <p data-time="105.00">越洒脱越放不下</p>
+            <p data-time="110.00">成人后情绪总反着表达</p>
+            <p data-time="115.00">你想哭就哭吧</p>
+            <p data-time="120.00">明天总要微笑啊</p>
+            <p data-time="125.00">走着走着怎么脚步渐渐慢了</p>
+            <p data-time="130.00">忙着忙着怎么生活变得拖沓</p>
+            <p data-time="135.00">街角的旧楼推倒了</p>
+            <p data-time="140.00">怀旧的人 住在热闹繁华的大厦</p>
+            <p data-time="145.00">爱着爱着怎么爱人就不见了</p>
+            <p data-time="150.00">想着想着怎么样子也模糊了</p>
+            <p data-time="155.00">当初多特别的一个</p>
+            <p data-time="160.00">平凡的 丢进人海里匆匆着</p>
+            <p data-time="165.00">也许没那么复杂</p>
+            <p data-time="170.00">走着走着如果觉得累就停吧</p>
+            <p data-time="175.00">忙着忙着迷失了就安静一下</p>
+            <p data-time="180.00">繁华的大厦不会塌</p>
+            <p data-time="185.00">每一个人 三餐一宿都会有个家</p>
+            <p data-time="190.00">爱着爱着总有人教我们长大</p>
+            <p data-time="195.00">想着想着快乐总大过悲伤啊</p>
+            <p data-time="200.00">叫幸福的花 晚点开</p>
+            <p data-time="205.00">栽种的人 谦卑中学会了强大</p>
+            <p data-time="210.00">姗姗 最近睡眠好吗</p>
+            <p data-time="215.00">听完 这首歌 快睡吧</p>
+        </div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="controls">
+            <button id="play-pause">播放</button>
+            <button id="mute"><i class="fa fa-volume-up"></i></button>
+            <div class="volume">
+                <i class="fa fa-volume-down"></i>
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+            </div>
+        </div>
+        <!-- 可将此处的音乐链接替换为你自己的背景音乐链接 -->
+        <audio id="audio" src="shanshan.mp3" autoplay loop></audio> 
+    </div>
+    <script>
+        const audio = document.getElementById('audio');
+        const playPauseButton = document.getElementById('play-pause');
+        const progress = document.querySelector('.progress');
+        const cd = document.querySelector('.cd');
+        const volumeInput = document.getElementById('volume');
+        const muteButton = document.getElementById('mute');
+        const lyrics = document.querySelectorAll('.lyrics p');
+
+        let isPlaying = false;
+        let currentLyricIndex = 0;
+        let lastScrollTime = 0;
+        let scrollInterval;
+
+        playPauseButton.addEventListener('click', function () {
+            if (isPlaying) {
+                audio.pause();
+                playPauseButton.textContent = '播放';
+                cd.style.animationPlayState = 'paused';
+                isPlaying = false;
+                clearInterval(scrollInterval);
+            } else {
+                audio.play();
+                playPauseButton.textContent = '暂停';
+                cd.style.animationPlayState = 'running';
+                isPlaying = true;
+                startLyricsScroll();
+            }
+        });
+
+        function startLyricsScroll() {
+            scrollInterval = setInterval(() => {
+                if (isPlaying) {
+                    const currentTime = audio.currentTime;
+                    const currentLine = lyrics[currentLyricIndex];
+                    const currentLineTime = parseFloat(currentLine.dataset.time);
+                    const nextLine = lyrics[currentLyricIndex + 1];
+                    const nextLineTime = nextLine ? parseFloat(nextLine.dataset.time) : Infinity;
+
+                    if (currentTime >= nextLineTime) {
+                        currentLine.classList.remove('active');
+                        currentLyricIndex++;
+                        if (currentLyricIndex < lyrics.length) {
+                            const newActiveLine = lyrics[currentLyricIndex];
+                            newActiveLine.classList.add('active');
+                            const offset = newActiveLine.offsetTop - document.querySelector('.lyrics').offsetHeight / 2;
+                            document.querySelector('.lyrics').scrollTop = offset;
+                        }
+                    }
+
+                    // 匀速滚动逻辑
+                    const scrollStep = 1; // 每次滚动的像素数
+                    const now = Date.now();
+                    if (now - lastScrollTime > 10) { // 每 10 毫秒滚动一次
+                        const lyricsContainer = document.querySelector('.lyrics');
+                        lyricsContainer.scrollTop += scrollStep;
+                        lastScrollTime = now;
+                    }
+                }
+            }, 10);
+        }
+
+        audio.addEventListener('timeupdate', function () {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = percent + '%';
+        });
+
+        volumeInput.addEventListener('input', function () {
+            audio.volume = this.value;
+        });
+
+        muteButton.addEventListener('click', function () {
+            if (audio.muted) {
+                audio.muted = false;
+                muteButton.innerHTML = '<i class="fa fa-volume-up"></i>';
+            } else {
+                audio.muted = true;
+                muteButton.innerHTML = '<i class="fa fa-volume-off"></i>';
+            }
+        });
+    </script>
+</body>
+
+</html>
+    
